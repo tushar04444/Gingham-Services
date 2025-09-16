@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gingham Agency — Modern IT Services</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Animate.css for WOW.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --bg: #0b0f12;
+      --muted: #bfc9d1;
+      --muted-2: #98a6b0;
+      --card: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.06);
+      --accent: #7ce7c7;
+      --accent-2: #6ea8fe;
+      --accent-dark: #064554;
+      --heading: #ffffff;
+      --radius: 14px;
+    }
+
+    /* Basic */
+    html,body{height:100%; background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(110,168,254,0.06), transparent),
+      radial-gradient(1000px 500px at 90% 90%, rgba(124,231,199,0.03), transparent),
+      var(--bg);
+      color:var(--muted); font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing:antialiased; scroll-behavior:smooth;
+    }
+
+    a{transition: all .18s ease;}
+    .container{max-width:1200px;}
+
+    /* Preloader */
+    #preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:2000}
+    #preloader .spinner{width:64px;height:64px;border-radius:50%;border:6px solid rgba(255,255,255,0.08);border-top-color:var(--accent);animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* NAV */
+    .navbar{padding:1rem 0; backdrop-filter: blur(6px);}
+    .navbar-brand{font-weight:800;color:var(--accent);letter-spacing:1px}
+    .nav-link{color:var(--muted);font-weight:600;padding:.5rem .75rem}
+    .nav-link:hover,.nav-link:focus{color:var(--heading)}
+    .nav-link.active{color:var(--heading);border-bottom:2px solid var(--accent-2);border-radius:2px}
+
+    /* sticky shadow when scrolled */
+    .navbar.scrolled{box-shadow:0 6px 30px rgba(2,6,23,0.6);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+
+    /* Hero */
+    header.hero{min-height:100vh;display:flex;align-items:center;padding-top:90px;padding-bottom:60px}
+    .eyebrow{color:var(--accent-2);text-transform:uppercase;font-weight:700;letter-spacing:1.6px;font-size:12px}
+    .hero h1{font-size:3.25rem;line-height:1.02;color:var(--heading);margin:.3rem 0}
+    .hero p.lead{color:var(--muted-2);max-width:680px}
+
+    .hero-ctas .btn{border-radius:10px;padding:.85rem 1.25rem;font-weight:700}
+
+    /* cards */
+    .card-dark{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--glass-border); border-radius:var(--radius); color:var(--muted); box-shadow:0 10px 30px rgba(2,6,23,0.5);}
+
+    /* services */
+    .service-icon{width:76px;height:76px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
+    .service-title{color:var(--heading);font-weight:700;margin-bottom:6px}
+
+    /* Price cards */
+    .price-card{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:24px;border-radius:12px}
+    .price-card .price{font-size:28px;color:var(--accent);font-weight:800}
+
+    /* Swiper */
+    .swiper{padding:24px 0}
+    .swiper-slide{background:transparent}
+
+    /* testimonials */
+    .testimonial{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:10px;color:var(--muted)}
+
+    /* FAQ */
+    .accordion-button{background:transparent;color:var(--muted);font-weight:700}
+    .accordion-body{color:var(--muted-2)}
+
+    /* contact */
+    .form-control, .form-select{background:#0c1115;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .form-label{color:var(--muted)}
+
+    /* mannequin */
+    .mannequin{width:260px;height:380px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}100%{transform:translateY(0) rotate(-2deg)}}
+
+    /* back-to-top */
+    #backTop{position:fixed;right:18px;bottom:18px;width:48px;height:48px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#031124;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(2,6,23,0.5);cursor:pointer;z-index:1300;opacity:0;transform:translateY(20px);transition:all .24s ease}
+    #backTop.show{opacity:1;transform:translateY(0)}
+
+    /* Footer */
+    footer{padding:36px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+
+    /* responsive tweaks */
+    @media (max-width:992px){
+      .hero h1{font-size:2.4rem}
+      .mannequin{width:200px;height:300px}
+    }
+    @media (max-width:576px){
+      .hero h1{font-size:1.8rem}
+      .hero p.lead{font-size:.95rem}
+      .navbar-collapse{backdrop-filter: blur(8px)}
+    }
+
+    /* small utility */
+    .muted-sm{color:var(--muted-2);font-size:.95rem}
+    .btn-accent{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#031124;font-weight:800;padding:.7rem 1rem;border-radius:10px;border:none}
+    .btn-outline-glass{border:1px solid rgba(255,255,255,0.06);color:var(--muted);background:transparent;border-radius:10px;padding:.55rem 1rem}
+
+     /* :root {
+      --bg: #0b0f12;
+      --card: #101820;
+      --muted: #b5bcc4;
+      --text: #d6dbe1;
+      --heading: #ffffff;
+      --accent: #7ce7c7;
+      --accent-2: #6ea8fe;
+    } */
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(110,168,254,0.06), transparent),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(124,231,199,0.03), transparent),
+                  var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+      line-height: 1.7;
+    }
+
+    h1,h2,h3,h4,h5,h6 { 
+      color: var(--heading); 
+      font-weight: 700; 
+      margin-bottom: 20px;
+    }
+
+    p { margin-bottom: 15px; color: var(--text); }
+
+    section { padding: 100px 0; }
+
+    /* Navbar */
+    .navbar-dark .navbar-nav .nav-link { 
+      color: var(--muted); 
+      margin: 0 12px; 
+      font-weight: 500; 
+      transition: color .3s; 
+    }
+    .navbar-dark .navbar-nav .nav-link:hover { color: var(--accent-2); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('https://picsum.photos/1600/900?grayscale') center/cover;
+      color: #fff;
+      padding: 120px 0 80px;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+    .hero p { font-size: 1.2rem; color: var(--muted)!important; }
+
+    /* Buttons */
+    .btn-accent {
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color: #031124;
+      font-weight: 600;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 8px;
+      transition: all .3s;
+    }
+    .btn-accent:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(110,168,254,0.4); }
+
+    /* Services */
+    .service-box {
+      background: var(--card);
+      padding: 40px 30px;
+      border-radius: 14px;
+      transition: transform .3s, box-shadow .3s;
+      height: 100%;
+    }
+    .service-box h4 { margin-bottom: 15px; }
+    .service-box:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+
+    /* Swiper */
+    .swiper { padding: 50px 0; }
+    .swiper-slide {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 30px;
+      color: var(--heading);
+      text-align: center;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    /* FAQ */
+    .accordion-button { 
+      background: var(--card); 
+      color: var(--heading); 
+      font-weight: 500; 
+    }
+    .accordion-item { 
+      background: var(--card); 
+      border: none; 
+      margin-bottom: 15px; 
+      border-radius: 8px;
+    }
+    .accordion-body { color: var(--muted); }
+
+    /* Contact */
+    .form-control { 
+      background: #0c1115; 
+      border: 1px solid rgba(255,255,255,0.1); 
+      color: var(--heading); 
+      padding: 14px; 
+    }
+    .form-control:focus {
+      border-color: var(--accent-2);
+      box-shadow: none;
+    }
+
+    .mannequin {
+        width: 260px;
+        height: 380px;
+        border-radius: 18px;
+        background: #444141;
+        border: 1px solid rgba(255,255,255,0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    /* Footer */
+    footer { background: #0a0d0f; padding: 50px 0; color: var(--muted); text-align: center; }
+
+#extras {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh; /* optional */
+}
+
+#extras video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+#extras .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65); /* adjust opacity to make content readable */
+  z-index: 1;
+}
+
+#extras .container {
+  position: relative;
+  z-index: 2; /* above overlay & video */
+}
+
+/* Headings & text */
+#extras h4, #extras h5 {
+  color: #fff;
+}
+#extras p {
+  color: #ddd;
+}
+
+/* Tabs */
+#extras .nav-pills .nav-link {
+  background: rgba(255,255,255,0.1);
+  color: #ddd;
+  border-radius: 30px;
+  transition: all .3s ease;
+}
+#extras .nav-pills .nav-link:hover {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+#extras .nav-pills .nav-link.active {
+  background: var(--accent, #ff5722);
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Tab content box */
+#processTabsContent {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+}
+
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="120" tabindex="0">
+
+  <!-- PRELOADER -->
+  <div id="preloader" aria-hidden="true">
+    <div class="spinner" role="status" aria-label="Loading"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top" aria-label="Primary navigation">
+    <div class="container">
+      <a class="navbar-brand" href="#home">Gingham</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navmenu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-7">
+          <div class="eyebrow wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">Full-stack IT Services</div>
+
+          <h1 class="wow animate__animated animate__fadeInUp" data-wow-delay="0.25s">We design, build & scale modern web and mobile products</h1>
+
+          <p class="lead text-muted wow animate__animated animate__fadeInUp" data-wow-delay="0.45s">
+            Branding · Web Development · Mobile Apps · Cloud & DevOps · AI & Automation — focused on performance, accessibility and delightful UX.
+          </p>
+
+          <div class="mt-4 hero-ctas wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+            <a href="#contact" class="btn btn-accent me-3" aria-label="Get a quote">Get a Quote</a>
+            <a href="#services" class="btn btn-outline-glass" aria-label="See services">Our Services</a>
+          </div>
+
+          <div class="d-flex gap-3 flex-wrap mt-5">
+            <div class="card card-dark p-3 wow animate__animated animate__fadeInLeft" data-wow-delay="0.8s"><strong style="color:var(--heading)">120+</strong> Projects</div>
+            <div class="card card-dark p-3 wow animate__animated animate__fadeInLeft" data-wow-delay="0.95s"><strong style="color:var(--heading)">50+</strong> Clients</div>
+            <div class="card card-dark p-3 wow animate__animated animate__fadeInLeft" data-wow-delay="1.05s"><strong style="color:var(--heading)">10</strong> Years Avg Experience</div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 text-center">
+          <div class="mannequin mx-auto wow animate__animated animate__zoomIn" data-wow-delay="0.6s" aria-hidden="true">
+            <!-- simple mannequin SVG -->
+            <svg width="160" height="260" viewBox="0 0 160 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decorative mannequin">
+              <rect x="20" y="10" rx="18" width="120" height="240" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)"/>
+              <circle cx="80" cy="54" r="22" fill="rgba(110,168,254,0.06)"/>
+              <rect x="42" y="90" width="76" height="110" rx="12" fill="rgba(124,231,199,0.03)"/>
+            </svg>
+          </div>
+          <div class="mt-3 muted-sm wow animate__animated animate__fadeInUp" data-wow-delay="0.8s">Design-driven engineering & strategic consulting for fast-growing teams.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-6">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-md-6 wow animate__animated animate__fadeInLeft">
+          <div class="card card-dark p-4">
+            <h3>About Gingham Agency</h3>
+            <p>We build reliable digital products — from pixel-perfect UI to scalable backend and cloud infrastructure. Our team focuses on measurable outcomes, secure engineering, and delightful user experiences.</p>
+            <ul class="mb-0">
+              <li>Human-centered product design</li>
+              <li>Scalable engineering & DevOps</li>
+              <li>Maintenance & SRE</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6 wow animate__animated animate__fadeInRight">
+          <div class="card card-dark p-4">
+            <h4>Our Approach</h4>
+            <p>We combine rapid prototyping with test-driven engineering and continuous delivery. Projects are broken into measurable sprints with clear KPIs and retrospectives.</p>
+            <div class="mt-3">
+              <div class="progress" style="height:12px;background:rgba(255,255,255,0.03);border-radius:10px">
+                <div class="progress-bar" role="progressbar" style="width:88%;background:linear-gradient(90deg,var(--accent),var(--accent-2))" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <small>Delivery & satisfaction score</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-6">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="wow animate__animated animate__fadeInUp">Services</h3>
+        <p class="small wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">End-to-end solutions — pick what you need</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- service 1 -->
+        <div class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+          <div class="card card-dark p-4 h-100">
+            <div class="d-flex gap-3">
+              <div class="service-icon">💻</div>
+              <div>
+                <h5 class="service-title">Web Development</h5>
+                <p class="small">SPAs, PWAs, headless eCommerce, and performance-first frontends.</p>
+                <a class="btn btn-outline-glass btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Web Development">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- service 2 -->
+        <div class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+          <div class="card card-dark p-4 h-100">
+            <div class="d-flex gap-3">
+              <div class="service-icon">📱</div>
+              <div>
+                <h5 class="service-title">Mobile Apps</h5>
+                <p class="small">Native & cross-platform apps with focus on UX and speed.</p>
+                <a class="btn btn-outline-glass btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Mobile Apps">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- service 3 -->
+        <div class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+          <div class="card card-dark p-4 h-100">
+            <div class="d-flex gap-3">
+              <div class="service-icon">☁️</div>
+              <div>
+                <h5 class="service-title">Cloud & DevOps</h5>
+                <p class="small">CI/CD, cost-optimized infra, monitoring and disaster recovery.</p>
+                <a class="btn btn-outline-glass btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Cloud & DevOps">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- service 4 -->
+        <div class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+          <div class="card card-dark p-4 h-100">
+            <div class="d-flex gap-3">
+              <div class="service-icon">🔐</div>
+              <div>
+                <h5 class="service-title">Security & Audit</h5>
+                <p class="small">Pen-tests, secure architecture reviews, and remediation plans.</p>
+                <a class="btn btn-outline-glass btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Security & Audit">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- service 5 -->
+        <div class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+          <div class="card card-dark p-4 h-100">
+            <div class="d-flex gap-3">
+              <div class="service-icon">🤖</div>
+              <div>
+                <h5 class="service-title">AI & Automation</h5>
+                <p class="small">Custom ML pipelines, chatbots and automation to cut manual work.</p>
+                <a class="btn btn-outline-glass btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="AI & Automation">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- service 6 -->
+        <div class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+          <div class="card card-dark p-4 h-100">
+            <div class="d-flex gap-3">
+              <div class="service-icon">🎨</div>
+              <div>
+                <h5 class="service-title">Design & Branding</h5>
+                <p class="small">UI systems, brand identity and motion design for polished products.</p>
+                <a class="btn btn-outline-glass btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="Design & Branding">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE STUDIES / SWIPER -->
+      <div class="mt-5">
+        <h5 class="wow animate__animated animate__fadeInUp">Case Studies</h5>
+        <div class="swiper mySwiper wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" aria-label="Case studies slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide card card-dark p-4">
+              <h6>Fintech Platform</h6>
+              <p class="small">Designed & built a payments platform used by thousands of merchants.</p>
+            </div>
+            <div class="swiper-slide card card-dark p-4">
+              <h6>Healthcare App</h6>
+              <p class="small">HIPAA-compliant mobile app for patient scheduling and telehealth.</p>
+            </div>
+            <div class="swiper-slide card card-dark p-4">
+              <h6>eCommerce Headless</h6>
+              <p class="small">Headless storefront with fast page loads and high conversion rates.</p>
+            </div>
+            <div class="swiper-slide card card-dark p-4">
+              <h6>Marketplace</h6>
+              <p class="small">B2B marketplace with robust search and multi-tenant architecture.</p>
+            </div>
+          </div>
+
+          <div class="swiper-pagination" aria-hidden="false"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING & TEAM -->
+<section id="extras" class="py-6">
+  <!-- Background video -->
+  <video autoplay muted loop playsinline>
+    <source src="/uploads/video/bg.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Overlay layer -->
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 wow animate__animated animate__fadeInUp">
+        
+        <!-- Heading -->
+        <div class="text-center mb-5">
+          <h4 class="fw-bold">Our Working Process</h4>
+          <p>We follow a structured workflow to ensure quality and consistency.</p>
+        </div>
+
+        <!-- Tabs Nav -->
+        <ul class="nav nav-pills justify-content-center flex-wrap gap-2 mb-4" id="processTabs" role="tablist">
+          <li class="nav-item"><button class="nav-link active px-3 py-2" id="discovery-tab" data-bs-toggle="pill" data-bs-target="#discovery" type="button">1. Discovery</button></li>
+          <li class="nav-item"><button class="nav-link px-3 py-2" id="research-tab" data-bs-toggle="pill" data-bs-target="#research" type="button">2. Research</button></li>
+          <li class="nav-item"><button class="nav-link px-3 py-2" id="planning-tab" data-bs-toggle="pill" data-bs-target="#planning" type="button">3. Planning</button></li>
+          <li class="nav-item"><button class="nav-link px-3 py-2" id="execute-tab" data-bs-toggle="pill" data-bs-target="#execute" type="button">4. Execute</button></li>
+          <li class="nav-item"><button class="nav-link px-3 py-2" id="testing-tab" data-bs-toggle="pill" data-bs-target="#testing" type="button">5. Testing</button></li>
+          <li class="nav-item"><button class="nav-link px-3 py-2" id="delivery-tab" data-bs-toggle="pill" data-bs-target="#delivery" type="button">6. Delivery</button></li>
+          <li class="nav-item"><button class="nav-link px-3 py-2" id="support-tab" data-bs-toggle="pill" data-bs-target="#support" type="button">7. Support</button></li>
+        </ul>
+
+        <!-- Tabs Content -->
+        <div class="tab-content p-5 rounded-4 shadow-lg border border-secondary" id="processTabsContent">
+          <div class="tab-pane fade show active animate__animated animate__fadeIn" id="discovery">
+            <h5 class="fw-bold" style="color:var(--accent)">Discovery</h5>
+            <p>We start by understanding your business goals, audience, and expectations. This helps us define the scope and vision for the project.</p>
+          </div>
+          <div class="tab-pane fade animate__animated animate__fadeIn" id="research">
+            <h5 class="fw-bold" style="color:var(--accent)">Research</h5>
+            <p>Our team performs in-depth research, competitor analysis, and user behavior studies to lay down a strong foundation for your solution.</p>
+          </div>
+          <div class="tab-pane fade animate__animated animate__fadeIn" id="planning">
+            <h5 class="fw-bold" style="color:var(--accent)">Planning</h5>
+            <p>We create a roadmap, wireframes, and technical specifications to ensure every detail is aligned before development begins.</p>
+          </div>
+          <div class="tab-pane fade animate__animated animate__fadeIn" id="execute">
+            <h5 class="fw-bold" style="color:var(--accent)">Execute</h5>
+            <p>During development, we integrate needed functionality and features into the application. The final product begins to take form, bringing your ideas to life.</p>
+          </div>
+          <div class="tab-pane fade animate__animated animate__fadeIn" id="testing">
+            <h5 class="fw-bold" style="color:var(--accent)">Testing</h5>
+            <p>Rigorous testing ensures stability, performance, and security. Our QA team validates every feature across devices and browsers.</p>
+          </div>
+          <div class="tab-pane fade animate__animated animate__fadeIn" id="delivery">
+            <h5 class="fw-bold" style="color:var(--accent)">Delivery</h5>
+            <p>We deploy the product to production, ensuring smooth launch, documentation, and training for your team if needed.</p>
+          </div>
+          <div class="tab-pane fade animate__animated animate__fadeIn" id="support">
+            <h5 class="fw-bold" style="color:var(--accent)">Support</h5>
+            <p>After delivery, we provide ongoing support, updates, and monitoring to keep your product reliable and up to date.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- TESTIMONIALS -->
+  <section class="py-6">
+    <div class="container">
+      <h4 class="mb-4">What clients say</h4>
+      <div class="swiper testimonialsSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide testimonial card-dark p-4">
+            <p>"Gingham built our MVP in record time — stellar communication and engineering."</p>
+            <strong style="color:var(--heading)">— CEO, Fintech</strong>
+          </div>
+          <div class="swiper-slide testimonial card-dark p-4">
+            <p>"The team provided measurable performance improvements and reliable support."</p>
+            <strong style="color:var(--heading)">— Head of Product, HealthTech</strong>
+          </div>
+          <div class="swiper-slide testimonial card-dark p-4">
+            <p>"Highly professional, great design and engineering. We saw conversion lift."</p>
+            <strong style="color:var(--heading)">— Founder, eCommerce</strong>
+          </div>
+        </div>
+        <div class="swiper-pagination t-pag"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-6">
+    <div class="container">
+      <h3 class="wow animate__animated animate__fadeInUp">Frequently asked questions</h3>
+      <div class="row mt-4">
+        <div class="col-lg-8 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+          <div class="accordion faq" id="accordionFaq">
+            <div class="accordion-item card-dark">
+              <h2 class="accordion-header" id="qOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">How long does a typical project take?</button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                <div class="accordion-body">Small websites 2-6 weeks, medium projects 2-4 months, large enterprise projects are phased with iterative delivery.</div>
+              </div>
+            </div>
+
+            <div class="accordion-item card-dark">
+              <h2 class="accordion-header" id="qTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">What do you charge?</button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                <div class="accordion-body">Pricing varies by scope: fixed-price for small, time & materials for long engagements, and retainers for ongoing work.</div>
+              </div>
+            </div>
+
+            <div class="accordion-item card-dark">
+              <h2 class="accordion-header" id="qThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Do you provide post-launch support?</button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                <div class="accordion-body">Yes — we offer support packages, monitoring, on-call SLA options and continuous improvement plans.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 wow animate__animated animate__fadeInRight" data-wow-delay="0.3s">
+          <div class="card card-dark p-4">
+            <h6>Still have questions?</h6>
+            <p class="small">Drop us a message — we usually reply within 1 business day.</p>
+            <a href="#contact" class="btn btn-outline-glass">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-6">
+    <div class="container">
+      <h3 class="wow animate__animated animate__fadeInUp">Contact Us</h3>
+      <div class="row mt-4">
+        <div class="col-lg-6 wow animate__animated animate__fadeInLeft">
+          <div class="card card-dark p-4">
+            <form id="contactForm" novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input id="name" class="form-control" type="text" required aria-required="true" />
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" class="form-control" type="email" required aria-required="true" />
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="service" class="form-label">Service</label>
+                <select id="service" class="form-select" aria-label="Select service">
+                  <option>Web Development</option>
+                  <option>Mobile Apps</option>
+                  <option>Cloud & DevOps</option>
+                  <option>AI & Automation</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" class="form-control" rows="5"></textarea>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button class="btn btn-accent" type="submit" aria-label="Send message">Send message</button>
+                <button class="btn btn-outline-glass" type="reset">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-6 wow animate__animated animate__fadeInRight">
+          <div class="card card-dark p-4 h-100">
+            <h6>Visit us</h6>
+            <p class="small mb-3">Gingham Agency<br/>123 Developer Lane<br/>Dhaka, Bangladesh</p>
+
+            <h6>Follow</h6>
+            <div class="d-flex gap-2 mt-2">
+              <a href="#" class="btn btn-outline-glass btn-sm" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="btn btn-outline-glass btn-sm" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="btn btn-outline-glass btn-sm" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+            </div>
+
+            <hr style="border-color:rgba(255,255,255,0.03)">
+
+            <h6>Office hours</h6>
+            <p class="small mb-0">Mon — Fri: 9:00 — 18:00 (GMT+6)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex justify-content-between align-items-center flex-column flex-md-row gap-3">
+      <div><small>&copy; <span id="year"></span> Gingham Agency. All rights reserved.</small></div>
+      <!-- <div class="text-muted small">Built with ❤️ — Modern, responsive & animated</div> -->
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <div id="backTop" class="" role="button" aria-label="Back to top" title="Back to top">
+    <i class="fa fa-arrow-up"></i>
+  </div>
+
+  <!-- Service Modal -->
+  <div class="modal fade" id="serviceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content card-dark p-3">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="serviceModalLabel">Service details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-muted">
+          <p id="serviceModalBody">Loading details...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS (defer where appropriate) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.3/wow.min.js" defer></script>
+
+  <script>
+    // wrapped in DOMContentLoaded so deferred scripts are ready
+    document.addEventListener('DOMContentLoaded', function(){
+
+      // Remove preloader once page fully loaded (fallback)
+      window.addEventListener('load', function(){ document.getElementById('preloader')?.remove(); });
+
+      // Show navbar shadow when scrolled
+      const nav = document.querySelector('.navbar');
+      const toggleNavShadow = ()=> nav.classList.toggle('scrolled', window.scrollY > 20);
+      toggleNavShadow();
+      window.addEventListener('scroll', toggleNavShadow);
+
+      // Initialize WOW.js
+      if(window.WOW) {
+        new WOW({boxClass:'wow', animateClass:'animate__animated', offset:60, mobile:true, live:true}).init();
+      }
+
+      // Initialize Swiper (case studies)
+        const swiperEl = document.querySelector('.mySwiper');
+        if(swiperEl && window.Swiper){
+        new Swiper(swiperEl, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: { 768: { slidesPerView: 2 }, 1200: { slidesPerView: 3 } },
+            autoplay: {
+            delay: 3000,
+            disableOnInteraction: false, // keeps autoplay running after user swipes
+            pauseOnMouseEnter: false     // don’t pause when hovering
+            },
+            speed: 800 // smooth transition
+        });
+        }
+
+        // Testimonials Swiper
+        const tEl = document.querySelector('.testimonialsSwiper');
+        if(tEl && window.Swiper){
+        new Swiper(tEl, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: { el: '.t-pag', clickable: true },
+            autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false
+            },
+            breakpoints:{ 768:{ slidesPerView:2 } },
+            speed: 800
+        });
+        }
+      // Smooth scroll & close collapsed nav on click
+      document.querySelectorAll('a.nav-link[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          const target = document.querySelector(href);
+          if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+          const bsCollapse = document.querySelector('.navbar-collapse.show');
+          if(bsCollapse){ new bootstrap.Collapse(bsCollapse).toggle(); }
+        });
+      });
+
+      // Active link highlighting on scroll (simple)
+      const sections = document.querySelectorAll('section, header');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const onScrollActive = ()=>{
+        const fromTop = window.scrollY + 140;
+        sections.forEach(sec=>{
+          if(!sec.id) return;
+          if(sec.offsetTop <= fromTop && sec.offsetTop + sec.offsetHeight > fromTop){
+            navLinks.forEach(l => l.classList.remove('active'));
+            const active = document.querySelector('.nav-link[href="#'+sec.id+'"]');
+            active?.classList.add('active');
+          }
+        });
+      };
+      onScrollActive();
+      window.addEventListener('scroll', onScrollActive);
+
+      // Back-to-top button
+      const back = document.getElementById('backTop');
+      const showBack = ()=> back.classList.toggle('show', window.scrollY > 400);
+      showBack();
+      window.addEventListener('scroll', showBack);
+      back.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+      // Contact form validation + fake submit
+      const contactForm = document.getElementById('contactForm');
+      if(contactForm){
+        contactForm.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          // native validation
+          if(!contactForm.checkValidity()){
+            contactForm.classList.add('was-validated');
+            return;
+          }
+          // Show fake success (integrate your API here)
+          const name = document.getElementById('name').value;
+          alert('Thanks, ' + (name||'Friend') + '! We received your message — we will respond within 1 business day.');
+          contactForm.reset();
+          contactForm.classList.remove('was-validated');
+        });
+      }
+
+      // Mannequin parallax
+      const man = document.querySelector('.mannequin');
+      document.addEventListener('mousemove', (e)=>{
+        if(!man) return;
+        const x = (e.clientX - window.innerWidth/2) / 80;
+        const y = (e.clientY - window.innerHeight/2) / 120;
+        man.style.transform = `translate3d(${x}px, ${-Math.abs(y)}px, 0) rotate(${x}deg)`;
+      });
+
+      // Service modal content injection
+      const serviceModal = document.getElementById('serviceModal');
+      serviceModal?.addEventListener('show.bs.modal', function(event){
+        const button = event.relatedTarget;
+        const service = button?.getAttribute('data-service') || 'Service';
+        const body = this.querySelector('#serviceModalBody');
+        this.querySelector('.modal-title').textContent = service;
+        // Basic content map — extend as needed
+        const content = {
+          'Web Development':'Modern frontends, SPAs, accessibility, SEO, and headless implementations with performance budgets.',
+          'Mobile Apps':'Native and cross-platform apps, push notifications, analytics and app store publishing support.',
+          'Cloud & DevOps':'Cloud architecture, infra as code, CI/CD pipelines and observability for resilient systems.',
+          'Security & Audit':'Security assessments, pen-testing, threat modeling and remediation guidance.',
+          'AI & Automation':'Proof-of-concepts, chatbots, model integration and automation to reduce manual work.',
+          'Design & Branding':'Product design, prototyping, brand systems and motion UI for consistent experiences.'
+        };
+        body.textContent = content[service] || 'We provide enterprise-grade solutions tailored to your needs.';
+      });
+
+      // Simple keyboard accessibility: close modal on ESC already handled by Bootstrap
+
+      // Add small delay to remove preloader if still present (safety)
+      setTimeout(()=>{ document.getElementById('preloader')?.remove(); }, 3000);
+
+      // Set footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
